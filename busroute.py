@@ -1,7 +1,9 @@
-"""Find the suitcase on the bus
-from the youtube video tutorial:
-https://www.youtube.com/watch?v=RrPZza_vZ3w#t=1643
-PDF of talk: http://dabeaz.com/pydata/LearnPyData.pdf"""
+# Find the suitcase on the bus
+# from the youtube video tutorial:
+# https://www.youtube.com/watch?v=RrPZza_vZ3w#t=1643
+# PDF of talk: http://dabeaz.com/pydata/LearnPyData.pdf
+
+# to run in the command line: $ python3 busroute.py
 
 # the reference location (an office in Chicago)
 office_lat = 41.980262
@@ -28,14 +30,12 @@ def find_northbound():
         id = bus.findtext('id')
         lat = float(bus.findtext('lat'))
         lon = bus.findtext('lon')
-        if d == 'North Bound':
+        if d == 'North Bound' and lat > office_lat:
             dist = distance(lat, office_lat)
             print ('time = ', check_time)
             print ('id = ', id)
-            # print ('lat = ', lat)
-            # print ('lon = ', lon)
-            print ('dist = ', dist)
-            if dist <= 0.5:  
+            print ('dist = %.2f miles' % dist)
+            if dist <= 5.0:  
                 open_map(str(lat), lon, id)
 
 # calculate distance from office to bus
